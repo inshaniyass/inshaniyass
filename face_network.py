@@ -6,7 +6,6 @@ from keras_vggface.vggface import VGGFace
 
 
 def create_face_network(nb_class=2, hidden_dim=512, shape=(224, 224, 3)):
-	# Convolution Features
 	model = VGGFace(include_top=False, input_shape=shape)
 	last_layer = model.get_layer('pool5').output
 	x = Flatten(name='flatten')(last_layer)

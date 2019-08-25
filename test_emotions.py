@@ -26,8 +26,7 @@ def predict_emotion(name):
 	rects = detector(im, 0)
 
 	for rect in rects:
-		face = im[rect.top():rect.bottom(), rect.left():rect.right()].copy() # Crop from x, y, w, h -> 100, 200, 300, 400
-		# NOTE: its img[y: y + h, x: x + w] and *not* img[x: x + w, y: y + h]
+		face = im[rect.top():rect.bottom(), rect.left():rect.right()].copy() 
 		face = cv2.resize(face, (IMAGE_SIZE, IMAGE_SIZE))
 		shape = predictor(face, dlib.rectangle(left=0, top=0, right=IMAGE_SIZE, bottom=IMAGE_SIZE))
 		poi = []

@@ -96,7 +96,7 @@ else:
   	"disgust",
   	"shame"]
 
-  # Plot non-normalized confusion matrix
+
   plt.figure()
   plot_confusion_matrix(cnf_matrix, classes=class_names,
                         title='Confusion matrix, without normalization',

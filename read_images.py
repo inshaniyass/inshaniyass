@@ -4,15 +4,15 @@ from PIL import Image
 import h5py
 import cv2
 
-# Global variables
+
 MALE = np.arange(0, 5)
 FEMALE = np.arange(5, 10)
 
-# Folder path
+
 PATH = "MSFDE"
 FILE_FORMAT = (".tif", ".jpg")
 
-# Get first three digits
+
 def getImageId(name):
 	return name[:3]
 
@@ -30,7 +30,7 @@ for subdir, dirs, files in os.walk(PATH):
 			im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
 			im = cv2.cvtColor(im, cv2.COLOR_GRAY2RGB)
 			
-			# im.show()
+			
 			images.append(np.array(im))
 
 			im = cv2.resize(im, (224, 224))
@@ -48,7 +48,7 @@ for subdir, dirs, files in os.walk(PATH):
 				emotion.append(0)
 
 
-# Concatenate
+
 images = np.float64(np.stack(images))
 print(images.shape)
 imagesResized = np.float64(np.stack(imagesResized))
@@ -58,18 +58,17 @@ emotion = np.stack(emotion)
 
 			
 	
-# Normalize data
+
 images /= 255.0
 imagesResized /= 255.0
-# Save to disk
+
 f = h5py.File("images.h5", "w")
-# Create dataset to store images
+
 X_dset = f.create_dataset('data', images.shape, dtype='f')
 X_dset[:] = images
 X_dset = f.create_dataset('dataResized', imagesResized.shape, dtype='f')
 X_dset[:] = imagesResized
 
-# Create dataset to store labels
 y_dset = f.create_dataset('sex', sex.shape, dtype='i')
 y_dset[:] = sex
 y_dset = f.create_dataset('ethnic', ethnic.shape, dtype='i')
